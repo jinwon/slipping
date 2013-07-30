@@ -12,6 +12,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="/">Home</a></li>
+              <li><a href="/bbs/${loginUser.userId}">게시판</a></li>
               <c:choose>
               <c:when test="${empty loginUser}">
               <li><a href="/users/login/form">로그인</a></li>

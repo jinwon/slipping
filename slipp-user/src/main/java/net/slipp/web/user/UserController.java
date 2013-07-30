@@ -58,6 +58,7 @@ public class UserController {
 
 	@RequestMapping("/{userId}/form")
 	public String updateForm(@PathVariable String userId, Model model) throws Exception {
+		//개인정보 수정 
 		User user = userService.findByUserId(userId);
 		model.addAttribute("user", user);
 		return "user/form";
@@ -65,6 +66,7 @@ public class UserController {
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.POST)
 	public String update(@PathVariable String userId, User user, Model model) throws Exception {
+		//개인정보를 수정할때 
 		log.debug("user : {}", user);
 		try {
 			userService.update(userId, user);
