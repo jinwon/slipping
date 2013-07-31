@@ -16,4 +16,9 @@ public class BbsDao {
 	public Bbs findBybbsIdx(String bbsIdx) throws SQLException {
 		return bbsmap.get(bbsIdx);
 	}
+	
+	//전체 리스트를 구한다.
+	public Map getBbsmap() {
+		return bbsmap;
+	}
 }

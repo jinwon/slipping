@@ -38,6 +38,15 @@
 		</param-value>
 	</context-param>
 
+	<!-- load-on-start 
+	<servlet>
+		<servlet-name>Loadinit</servlet-name>
+		<servlet-class>net.slipp.support.LoadInitServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	 -->
+
+
 	<servlet>
 		<servlet-name>slipp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

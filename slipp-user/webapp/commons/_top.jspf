@@ -12,11 +12,13 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="/">Home</a></li>
-              <li><a href="/bbs/${loginUser.userId}">게시판</a></li>
+              <li><a href="/bbs">게시판</a></li>
               <c:choose>
               <c:when test="${empty loginUser}">
               <li><a href="/users/login/form">로그인</a></li>
-              <li><a href="/users/form">회원가입</a></li>              
+              <li><a href="/users/form">회원가입</a></li>
+              <li><a href="/users/formauto">회원가입_auto</a></li>
+              <li><a href="/users/login/formauto">로그인_auto</a></li>
               </c:when>
               <c:otherwise>
               <li><a href="/users/logout">로그아웃</a></li>

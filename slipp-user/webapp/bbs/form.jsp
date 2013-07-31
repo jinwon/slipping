@@ -18,12 +18,25 @@
 			<div class="span12">
 				<section id="typography">
 				<div class="page-header">
+				
+				<c:if test="${ empty bbs.bbsIdx}">		
 					<h1>새 글쓰기</h1>
+					<c:set var="forwardUrl" value="/bbs/insert" />
+				</c:if>	
+
+				<c:if test="${not empty bbs.bbsIdx}">		
+					<h1>수정하기</h1>
+					<c:set var="forwardUrl" value="/bbs/${bbs.bbsIdx}" />
+				</c:if>	
+				
 				</div>
 				
-				<c:set var="forwardUrl" value="/bbs" />
-				
 				<form class="form-horizontal" action="${forwardUrl}" method="post">
+				
+				<c:if test="${not empty bbs.bbsIdx}">		
+					<input type="hidden" name="bbsIdx" id="bbsIdx" value="${bbs.bbsIdx}">
+				</c:if>	
+
 					<div class="control-group">
 						<label class="control-label" for="userId">아이디</label>
 						<div class="controls">
@@ -41,7 +54,7 @@
 					<div class="control-group">
 						<label class="control-label" for="password">비밀번호</label>
 						<div class="controls">
-							<input type="password" id="password" name="password" placeholder="">
+							<input type="password" id="bbsPassword" name="bbsPassword" placeholder="">
 						</div>
 					</div>
 
@@ -55,9 +68,7 @@
 					<div class="control-group">
 						<label class="control-label" for="content">내용</label>
 						<div class="controls">
-							<textarea id="content" name="content" rows="10" cols="300" >
-							${bbs.content}
-							</textarea>
+							<textarea id="content" name="content" rows="10" cols="300" >${bbs.content}</textarea>
 						</div>
 					</div>
 					

@@ -15,6 +15,12 @@
 <body>
 	<%@ include file="../commons/_top.jspf"%>
 
+<style>
+  a {text-decoration:none;}
+  a:hover {text-decoration:none;}
+  
+</style>
+
 	<div class="container">
 		<div class="row">
 			<div class="span12">
@@ -23,22 +29,50 @@
 					<h1>게시판</h1>
 				</div>
 				
-				게시판 목록을 표시합니다.
-<%
-	//Date date = new Date();
-%>				
-<c:set var="t_date" value="<%= new Date() %>" />
-
-<%= new Date().toString() %>
-				<div>
-					오늘 일자 : <fmt:formatDate value="${t_date}" type="both" pattern="yyyy/MM/dd_HH:mm:ss" />
+				<div style="font-size:12px;">
+					게시판 목록을 표시합니다.
 				</div>
+				
+				<div style="font-size:12px;">
+				
+				<c:if test="${lists == null}">
+					게시된 글이 없습니다.
+				</c:if>
+				
+				전체 글 갯수 :  ${count} <br>
+
+				<c:if test="${count > 0}">
+
+				<table style="width:100%; border:1px solid #999999;">
+					<tr style="background:#EEEEEE;border:1px solid #999999;">
+						<th style="width:100px;">작성자</th>
+						<th style="width:300px;">제목</th>
+						<th >내용</th>
+						<th style="width:100px;">작성일 </th>
+					</tr>
+
+				<c:forEach var="bbs"  items="${lists}">
+					<tr style="background:white;border:1px solid #cccccc;">
+						<td style="text-align:center;"><c:out value="${bbs.userId}" /></td>
+						<td><a href="/bbs/${bbs.bbsIdx}"><c:out value="${bbs.subject}" /></a></td>
+						<td><c:out value="${bbs.content}" /></td>
+						<td style="text-align:center;"><c:out value="${bbs.writeDate}" /></td>
+					</tr>	
+				</c:forEach>
+				
+				</table>
+				</c:if>				
+								
+				</div>
+
+
+			<div style="margin-top:10px; font-size:12px;">
+				<a href="/bbs/form">새 글쓰기 </a>
+			</div>
 				
 			</div>
 			
-			<div>
-				<a href="/bbs/form/${user.userId}">새 글쓰기 </a>
-			</div>
+
 			
 		</div>
 	</div>

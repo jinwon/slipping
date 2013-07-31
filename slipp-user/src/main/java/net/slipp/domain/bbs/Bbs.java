@@ -1,5 +1,8 @@
 package net.slipp.domain.bbs;
 
+import net.slipp.domain.user.User;
+import net.slipp.service.bbs.PasswordMismatchException;
+
 public class Bbs {
 	
 	private String bbsIdx;
@@ -66,6 +69,67 @@ public class Bbs {
 		this.writeDate = writeDate;
 	}
 
+	public boolean matchPassword(String checkPassword) {
+		if (checkPassword == null) {
+			return false;
+		}
+		
+		return checkPassword.equals(bbsPassword);
+	}
+	
+	public void update(Bbs updateBbs) throws PasswordMismatchException {
+		// TODO Auto-generated method stub
+		if (!matchPassword(updateBbs.bbsPassword)) {
+			throw new PasswordMismatchException();
+		}
+		
+		this.userId = updateBbs.userId;
+		this.subject = updateBbs.subject;
+		this.content = updateBbs.content;
+		this.writeDate = updateBbs.writeDate;		
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bbs other = (Bbs) obj;
+		if (subject == null) {
+			if (other.subject != null)
+				return false;
+		} else if (!subject.equals(other.subject))
+			return false;
+		
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		
+		if (bbsPassword == null) {
+			if (other.bbsPassword != null)
+				return false;
+		} else if (!bbsPassword.equals(other.bbsPassword))
+			return false;
+		
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}	
+	
+	
+	@Override
+	public String toString() {
+		return "Bbs [bbsIdx=" + bbsIdx + ", userId=" + userId + ", bbsPassword=" + bbsPassword + ", subject=" + subject 
+				+ ", content=" + content +", writeDate=" + writeDate + "]";
+	}	
 
 	
 	

@@ -26,6 +26,15 @@ public class UserController {
 		model.addAttribute("user", new User());
 		return "user/form";
 	}
+	
+	@RequestMapping("/formauto")
+	public String joinFormauto(Model model) throws Exception {
+		//테스트 용 
+		
+		model.addAttribute("user", new User());
+		return "user/formauto";
+	}
+	
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String join(User user) throws Exception {
@@ -39,6 +48,12 @@ public class UserController {
 		return "user/login";
 	}
 
+	@RequestMapping("/login/formauto")
+	public String loginFormauto() throws Exception {
+		return "user/loginauto";
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(String userId, String password, HttpSession session) throws Exception {
 		try {
