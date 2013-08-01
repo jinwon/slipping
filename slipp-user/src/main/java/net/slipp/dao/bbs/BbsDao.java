@@ -13,6 +13,10 @@ public class BbsDao {
 		bbsmap.put(bbs.getBbsIdx(), bbs);
 	}
 
+	public void remove(String bbsIdx) throws SQLException {
+		bbsmap.remove(bbsIdx);
+	}
+	
 	public Bbs findBybbsIdx(String bbsIdx) throws SQLException {
 		return bbsmap.get(bbsIdx);
 	}
@@ -21,4 +25,5 @@ public class BbsDao {
 	public Map getBbsmap() {
 		return bbsmap;
 	}
+	
 }

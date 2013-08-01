@@ -1,10 +1,14 @@
 package net.slipp.web.bbs;
 
+import java.awt.List;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -43,17 +47,27 @@ public class BbsController {
 		int count = bbslist.size();
 		
 		Bbs lists[] = new Bbs[count];
-				
-		Iterator<String> iterator = bbslist.keySet().iterator();
 		
+		//리스트 신규가 먼저 정렬
+		
+		ArrayList<String> key_lists = new ArrayList<String>();
+		
+		for (String str : bbslist.keySet())
+		{
+			key_lists.add(str);
+		}
+		
+		Collections.sort(key_lists, Collections.reverseOrder());
+
 		int s_idx = 0;
-		
-		while(iterator.hasNext()) {
-			String key = iterator.next();			
+	
+		for (String key : key_lists)
+		{
 			lists[s_idx] = bbslist.get(key);
 			s_idx++;
 		}
-		
+				
+			
 		model.addAttribute("lists", lists);
 		model.addAttribute("count", count);
 		
@@ -183,5 +197,28 @@ public class BbsController {
 		}
 		
 	}
+	
+	
+	@RequestMapping("/{bbsIdx}/delete")
+	public String delete(@PathVariable String bbsIdx, Model model, HttpSession session) throws Exception {
+		// 삭제 처리.
+		log.debug("bbs : delete");
+		log.debug("bbs : bbsIdx =" + bbsIdx);
+		
+		try {		
+			Bbs v_bbs = bbsService.findBybbsIdx(bbsIdx); 
+			
+			if (v_bbs != null) bbsService.remove(bbsIdx);
+			
+			return "redirect:/bbs/";
+		}
+		catch (Exception e) {
+			log.debug("bbs : delete error");
+			return "redirect:/bbs/";
+		}
+
+	}
+	
+	//delete
 
 }

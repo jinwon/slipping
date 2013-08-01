@@ -13,10 +13,12 @@ import org.slf4j.LoggerFactory;
 public class BbsService {
 	private static Logger log = LoggerFactory.getLogger(BbsService.class);
 	
+	BbsDao bbsDao = new BbsDao();
+	
+	
 	public Bbs insert(Bbs bbs) throws SQLException, ExistedBbsException {
 		//신규 추가 처리 
 		log.debug("Bbs : {}", bbs);
-		BbsDao bbsDao = new BbsDao();
 						
 		Bbs existed = bbsDao.findBybbsIdx(bbs.getBbsIdx());
 		if (existed != null) {
@@ -28,14 +30,12 @@ public class BbsService {
 	}
 	
 	public Bbs findBybbsIdx(String bbsIdx) throws SQLException {
-		BbsDao bbsDao = new BbsDao();
 		return bbsDao.findBybbsIdx(bbsIdx);
 	}
 	
 	
 	public Map getList() {
 		// 전체 리스트를 구한다.
-		BbsDao bbsDao = new BbsDao();
 		return bbsDao.getBbsmap();
 	}
 
@@ -50,5 +50,9 @@ public class BbsService {
 		bbs.update(updateBbs);
 	}
 
+	public void remove(String bbsIdx) throws SQLException {
+		bbsDao.remove(bbsIdx);
+	}
+	
 	
 }

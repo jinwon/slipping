@@ -17,9 +17,23 @@
 
 <style>
   a {text-decoration:none;}
-  a:hover {text-decoration:none;}
-  
+  a:hover {text-decoration:none;}  
 </style>
+
+<script language="javascript">
+	function bbs_delete(idx)
+	{
+		if (idx != "")
+		{
+			var location = "/bbs/" + idx + "/delete";
+			
+			if (confirm("삭제하시겠습니까?"))
+			{
+				window.location.href = location;	
+			}		
+		}		
+	}
+</script>
 
 	<div class="container">
 		<div class="row">
@@ -49,6 +63,7 @@
 						<th style="width:300px;">제목</th>
 						<th >내용</th>
 						<th style="width:100px;">작성일 </th>
+						<th style="width:100px;">삭제 </th>
 					</tr>
 
 				<c:forEach var="bbs"  items="${lists}">
@@ -57,6 +72,12 @@
 						<td><a href="/bbs/${bbs.bbsIdx}"><c:out value="${bbs.subject}" /></a></td>
 						<td><c:out value="${bbs.content}" /></td>
 						<td style="text-align:center;"><c:out value="${bbs.writeDate}" /></td>
+						<td style="text-align:center;">
+							<div class="controls">
+								<a href="#" onClick="bbs_delete('${bbs.bbsIdx}')"><button type="submit" class="btn btn-primary">삭제</button></a>
+							</div>
+					
+						</td>
 					</tr>	
 				</c:forEach>
 				
@@ -67,7 +88,9 @@
 
 
 			<div style="margin-top:10px; font-size:12px;">
-				<a href="/bbs/form">새 글쓰기 </a>
+				<div class="controls">
+					<a href="/bbs/form"><button type="submit" class="btn btn-primary">새 글쓰기 </button></a>
+				</div>
 			</div>
 				
 			</div>
