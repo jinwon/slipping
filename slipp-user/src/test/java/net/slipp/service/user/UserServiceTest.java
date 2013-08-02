@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import net.slipp.domain.user.User;
 
+
 import org.junit.Test;
 
 public class UserServiceTest {
