@@ -191,7 +191,7 @@ public class BbsController {
 			Bbs v_bbs = bbsService.findBybbsIdx(bbsIdx); 			
 			model.addAttribute("bbs", v_bbs);
 			
-			model.addAttribute("errorMessage", "수정시 오류가 발생하였습니다.");
+			model.addAttribute("errorMessage", "수정시 비밀번호가 일치하지 않습니다.");
 			
 			return "bbs/form";			
 		}

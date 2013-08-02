@@ -29,8 +29,7 @@ public class UserController {
 	
 	@RequestMapping("/formauto")
 	public String joinFormauto(Model model) throws Exception {
-		//테스트 용 
-		
+		//테스트 용 		
 		model.addAttribute("user", new User());
 		return "user/formauto";
 	}
