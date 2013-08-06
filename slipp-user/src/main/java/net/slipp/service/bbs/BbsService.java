@@ -3,17 +3,41 @@ package net.slipp.service.bbs;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+
 import net.slipp.dao.bbs.BbsDao;
+import net.slipp.dao.user.UserDao;
 import net.slipp.domain.bbs.Bbs;
 import net.slipp.service.bbs.PasswordMismatchException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class BbsService {
 	private static Logger log = LoggerFactory.getLogger(BbsService.class);
 	
-	BbsDao bbsDao = new BbsDao();
+	@Resource(name="memoryBbsDao")
+	private BbsDao bbsDao;
+	
+	public void setBbsDao(BbsDao bbsDao) {
+		this.bbsDao = bbsDao;
+	}
+	
+	@PostConstruct
+	public void initialize() {
+		log.debug("initialize");
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		log.debug("destroy");
+		
+	}
 	
 	
 	public Bbs insert(Bbs bbs) throws SQLException, ExistedBbsException {

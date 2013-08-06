@@ -2,18 +2,46 @@ package net.slipp.service.user;
 
 import java.sql.SQLException;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+
+
 import net.slipp.dao.user.UserDao;
 import net.slipp.domain.user.User;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class UserService {
 	private static Logger log = LoggerFactory.getLogger(UserService.class);
 
+	@Resource(name="memoryUserDao")
+	private UserDao userDao;
+	
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
+	@PostConstruct
+	public void initialize() {
+		log.debug("initialize");
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		log.debug("destroy");
+		
+	}
+	
+	
 	public User join(User user) throws SQLException, ExistedUserException {
 		log.debug("User : {}", user);
-		UserDao userDao = new UserDao();
 		User existedUser = userDao.findByUserId(user.getUserId());
 		if (existedUser != null) {
 			throw new ExistedUserException(user.getUserId());
@@ -24,7 +52,6 @@ public class UserService {
 	}
 
 	public User login(String userId, String password) throws SQLException, PasswordMismatchException {
-		UserDao userDao = new UserDao();
 		User user = userDao.findByUserId(userId);
 		if (user == null) {
 			throw new PasswordMismatchException();
@@ -38,7 +65,6 @@ public class UserService {
 	}
 
 	public User findByUserId(String userId) throws SQLException {
-		UserDao userDao = new UserDao();
 		return userDao.findByUserId(userId);
 	}
 
