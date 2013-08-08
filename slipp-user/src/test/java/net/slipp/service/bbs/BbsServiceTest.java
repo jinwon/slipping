@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -12,6 +11,7 @@ import java.text.SimpleDateFormat;
 import net.slipp.dao.bbs.BbsDao;
 import net.slipp.dao.user.UserDao;
 import net.slipp.domain.bbs.Bbs;
+import net.slipp.service.user.ExistedUserException;
 import net.slipp.service.user.UserService;
 
 import org.junit.*;
@@ -68,19 +68,54 @@ public class BbsServiceTest {
 	
 		assertEquals(newbbs.getSubject(), existbbs.getSubject());
 		assertEquals(newbbs.getContent(), existbbs.getContent());
-
+		assertEquals(newbbs.getWriteDate(), existbbs.getWriteDate());
 		
 	}
 
-	public void check_update() {
+	@Test
+	public void check_update() throws SQLException, ExistedBbsException, PasswordMismatchException {
+		// 업데이트 체크 
+		Bbs newbbs = new Bbs( bbsIdx, "user1", "1111", "subject", "content", writeDate);
+		
+		bbsService.insert(newbbs);
+		
+		when(bbsDao.findBybbsIdx(bbsIdx)).thenReturn(newbbs);		
+		
+		Bbs existbbs = bbsService.findBybbsIdx(bbsIdx);	
+		
+		Bbs updatebbs = new Bbs( bbsIdx, "user1", "1111", "subject11", "content22", writeDate);
+		bbsService.update(bbsIdx, updatebbs);
+		
+		Bbs checkbbs = bbsService.findBybbsIdx(bbsIdx);
+		
+		assertEquals(updatebbs.getSubject(), checkbbs.getSubject());
+		assertEquals(updatebbs.getContent(), checkbbs.getContent());
+	}
+
+	@Test(expected=PasswordMismatchException.class)
+	public void check_비밀번호오류() throws SQLException, ExistedBbsException, PasswordMismatchException {
+		Bbs newbbs = new Bbs( bbsIdx, "user1", "1111", "subject", "content", writeDate);
+		
+		bbsService.insert(newbbs);
+
+		when(bbsDao.findBybbsIdx(bbsIdx)).thenReturn(newbbs);
+		
+		Bbs updatebbs = new Bbs( bbsIdx, "user1", "222", "subject11", "content22", writeDate);
+		bbsService.update(bbsIdx, updatebbs);
 		
 	}
 
-	public void check_비밀번호오류() {
+	@Test
+	public void check_삭제() throws SQLException, ExistedBbsException {
+		Bbs newbbs = new Bbs( bbsIdx, "user1", "1111", "subject", "content", writeDate);
 		
-	}
+		bbsService.insert(newbbs);
 
-	public void check_삭제() {
+		bbsService.remove(newbbs.getBbsIdx());
+		
+		verify(bbsDao).remove(newbbs.getBbsIdx());
+		
+		assertNull(bbsService.findBybbsIdx(newbbs.getBbsIdx()));
 		
 	}
 }
