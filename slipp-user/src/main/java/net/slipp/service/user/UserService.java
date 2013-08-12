@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	private static Logger log = LoggerFactory.getLogger(UserService.class);
 
-	@Resource(name="memoryUserDao")
+	@Resource(name="userDao")
 	private UserDao userDao;
 	
 	public void setUserDao(UserDao userDao) {
