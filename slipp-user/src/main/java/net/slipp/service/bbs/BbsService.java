@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class BbsService {
 	private static Logger log = LoggerFactory.getLogger(BbsService.class);
 	
-	@Resource(name="memoryBbsDao")
+	@Resource(name="JdbcBbsDao")
 	private BbsDao bbsDao;
 	
 	public void setBbsDao(BbsDao bbsDao) {
@@ -49,6 +49,8 @@ public class BbsService {
 			throw new ExistedBbsException(bbs.getBbsIdx());
 		}
 
+		log.debug("Bbs insert call");
+		
 		bbsDao.insert(bbs);
 		return bbs;
 	}
@@ -71,7 +73,11 @@ public class BbsService {
 			throw new NullPointerException(bbsIdx + " user doesn't existed.");
 		}
 		
+		//패스워드 체크 
 		bbs.update(updateBbs);
+		
+		//데이타베이스 업데이트.
+		bbsDao.update(bbsIdx,  updateBbs);
 	}
 
 	public void remove(String bbsIdx) throws SQLException {

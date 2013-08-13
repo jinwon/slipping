@@ -16,6 +16,9 @@ public class AbstractDaoSupport extends JdbcDaoSupport {
 	
 	@PostConstruct
 	public void initialize() {
+		//
+		// 중요!!
+		//데이타 소스를 설정한
 		setDataSource(dataSource);
 		
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

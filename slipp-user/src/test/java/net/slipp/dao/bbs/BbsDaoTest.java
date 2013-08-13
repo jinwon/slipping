@@ -12,7 +12,7 @@ import net.slipp.domain.bbs.Bbs;
 
 import org.junit.Test;
 
-public class MemoryBbsDaoTest {
+public class BbsDaoTest {
 
 	@Test
 	public void insert() throws SQLException {
@@ -28,7 +28,7 @@ public class MemoryBbsDaoTest {
 		
 		Bbs newbbs = new Bbs( bbsIdx, "user1", "1111", "subject", "content", writeDate);
 		
-		MemoryBbsDao bbsDao = new MemoryBbsDao();
+		JdbcBbsDao bbsDao = new JdbcBbsDao();
 		bbsDao.insert(newbbs);
 		
 		//입력된 값이 존재하는지 체크함.
