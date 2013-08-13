@@ -120,6 +120,26 @@
                     <warSourceDirectory>webapp</warSourceDirectory>
                 </configuration>
             </plugin>
+            <plugin>
+            	<groupId>com.carbonfive.db-support</groupId>
+				<artifactId>db-migration-maven-plugin</artifactId>
+				<version>0.9.9-m5</version>
+				<executions>
+					<execution>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>migrate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>c5-public-repository</id>
+			<url>http://mvn.carbonfive.com/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

@@ -25,10 +25,6 @@ public class JdbcBbsDao extends AbstractDaoSupport implements BbsDao{
 		getJdbcTemplate().update(sql, new Object[] {bbs.getBbsIdx(), 
 				bbs.getUserId(), bbs.getBbsPassword(),bbs.getSubject(), 
 				bbs.getContent(), bbs.getWriteDate()});
-		
-		//String sql = "INSERT INTO BBS(bbsIdx, userId, bbsPassword, subject, content, writeDate) VALUES(?, ?, ?, ?, ?, ?)";
-		//getJdbcTemplate().update(sql, bbs.getBbsIdx(), bbs.getUserId(), bbs.getBbsPassword(),
-		//bbs.getSubject(), bbs.getContent(), bbs.getWriteDate());
 	}
 	
 	@Override
