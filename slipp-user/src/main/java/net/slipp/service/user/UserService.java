@@ -7,12 +7,12 @@ import javax.annotation.Resource;
 import net.slipp.dao.user.UserDao;
 import net.slipp.domain.user.User;
 import net.slipp.domain.audit.AuditObject;
-
 import net.slipp.service.audit.AuditService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -37,7 +37,6 @@ public class UserService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
 	
 	public User join(User user) throws SQLException, ExistedUserException {
 		log.debug("User : {}", user);
