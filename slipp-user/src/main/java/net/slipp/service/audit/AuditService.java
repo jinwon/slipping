@@ -10,17 +10,16 @@ import net.slipp.dao.audit.AuditDao;
 import net.slipp.domain.audit.AuditObject;
 
 @Service
-//@Transactional
+@Transactional
 public class AuditService {
 
 	@Resource(name="auditDao")
 	private AuditDao auditdao;
 	
-	//@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.SUPPORTS)
 	public void log(AuditObject audit) {
 		auditdao.log(audit);
 	}
-	
 	
 	public void setAuditDao (AuditDao auditDao) {
 		this.auditdao = auditDao;

@@ -10,6 +10,17 @@ CREATE TABLE USERS (
 
 INSERT INTO USERS VALUES('admin','password', '자바지기', 'admin@javajigi.net');
 
+DROP TABLE IF EXISTS AUDIT;
+
+CREATE TABLE AUDIT (
+	id INTEGER NOT NULL IDENTITY PRIMARY KEY,
+	who VARCHAR(12) NOT NULL,
+	whenn DATE,
+	resource VARCHAR(255) NOT NULL,
+	action VARCHAR(30) NOT NULL
+);
+
+
 DROP TABLE IF EXISTS BBS;
 
 CREATE TABLE BBS (
@@ -22,4 +33,4 @@ CREATE TABLE BBS (
 	PRIMARY KEY (bbsIdx)
 );
 
-INSERT INTO BBS VALUES('1', 'jinwon','1111', 'Bbs subject', 'content', '2013-08-13 00:00:00');
+//INSERT INTO BBS VALUES('1', 'jinwon','1111', 'Bbs subject', 'content', '2013-08-13 00:00:00');
