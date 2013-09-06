@@ -26,6 +26,12 @@ taglib prefix="qna" tagdir="/WEB-INF/tags/qnas"%>
 							</tr>
 						</c:forEach>
 						<tr>
+							<td style="height:30px;" colspan="3">&nbsp;</td>
+						</tr>
+						<tr>
+							<td style="height:30px;" colspan="3">&nbsp;페이지1 : </td>
+						</tr>
+						<tr>
 						  <td colspan="3">
 					        <!--페이지영역 -->
 					        <div class="pageBox">
@@ -39,7 +45,8 @@ taglib prefix="qna" tagdir="/WEB-INF/tags/qnas"%>
 					                prevGroupHtml=' <a href="{url}" class="page_prev">이전</a> '
 					                nextGroupHtml=' <a href="{url}" class="page_next">다음</a> '
 					                pageGroupSize="10"
-					                page="${questions}" />
+					                page="${questions}"
+					                suffixURI="&sort=1" />
 					        </div>
 					        <!--페이지영역 -->						  
 						  </td>

@@ -15,5 +15,8 @@ public class UserPopulator {
 	@PostConstruct
 	public void populate() {
 		userRepository.save(new User("javajigi", "password", "박재성", "javajigi@slipp.net", true));
+		
+		//add
+		userRepository.save(new User("jwkim", "1234", "김진원", "jwkim@sds.co.kr", true));
 	}
 }

@@ -33,10 +33,26 @@ public class QnaController {
 	private QnaService qnaService;
 
 	@RequestMapping("")
-	public String index(Model model) {
-		model.addAttribute("questions",
-				qnaService.findsQuestion(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+	public String index(Model model, HttpServletRequest request) {
+
+		
+		if (request.getParameter("page") == null)
+		{
+			model.addAttribute("questions",
+					qnaService.findsQuestion(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+		}
+		else {
+			
+			int page = Integer.parseInt(request.getParameter("page"));
+			
+			model.addAttribute("questions",
+				qnaService.findsQuestion(createPageableForList(page, DEFAULT_PAGE_SIZE)));
+		}
+		
 		model.addAttribute("tags", qnaService.findsTag());
+		
+		
+		
 		return "qna/list";
 	}
 
