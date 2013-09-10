@@ -35,7 +35,7 @@ public class QnaController {
 	@RequestMapping("")
 	public String index(Model model, HttpServletRequest request) {
 
-		
+		// 목록 리스트를 표시한다.
 		if (request.getParameter("page") == null)
 		{
 			model.addAttribute("questions",
@@ -49,9 +49,7 @@ public class QnaController {
 				qnaService.findsQuestion(createPageableForList(page, DEFAULT_PAGE_SIZE)));
 		}
 		
-		model.addAttribute("tags", qnaService.findsTag());
-		
-		
+		model.addAttribute("tags", qnaService.findsTag());		
 		
 		return "qna/list";
 	}
@@ -69,12 +67,18 @@ public class QnaController {
 
 	@RequestMapping("/form")
 	public String createForm(@LoginUser User user, Model model) {
+		
+		//신규 게시물을 추가한다.
+		
 		model.addAttribute(new Question());
 		return "qna/form";
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(@LoginUser User user, HttpServletRequest request, Question question) {
+		
+		//로그인 처리후 매핑 처리.
+		
 		logger.debug("Question : {}", question);
 
 		qnaService.createQuestion(user, question);
@@ -84,6 +88,7 @@ public class QnaController {
 	@RequestMapping("/{id}/form")
 	public String updateForm(@LoginUser User user, @PathVariable Long id, HttpServletRequest request, Model model) {
 		if (user == null) {
+			//유저 정보가 없을때 로그인 폼으로 이동한다.
 			return "redirect:/user/login/form";
 		}
 		model.addAttribute("question", qnaService.findByQuestionId(id));
@@ -93,6 +98,8 @@ public class QnaController {
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public String update(@LoginUser User user, Question question) {
 		logger.debug("Question : {}", question);
+		
+		// 질문 수정시 로그인 체크.
 		qnaService.updateQuestion(user, question);
 		return "redirect:/qna";
 	}

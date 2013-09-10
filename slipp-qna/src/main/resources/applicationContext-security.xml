@@ -12,6 +12,11 @@
         <intercept-url pattern="/qna" method="POST" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/qna/*/form" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/qna" method="PUT" access="hasRole('ROLE_USER')"/>
+  
+        <intercept-url pattern="/bbs/form" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/bbs" method="POST" access="hasRole('ROLE_USER')"/>
+ 		<intercept-url pattern="/bbs/*/form" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/bbs" method="PUT" access="hasRole('ROLE_USER')"/>
     
         <intercept-url pattern="/**" access="permitAll" />
 

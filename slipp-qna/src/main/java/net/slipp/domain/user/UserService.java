@@ -46,6 +46,8 @@ public class UserService {
 	}
 
 	public boolean login(String userId, String password) throws PasswordMismatchException {
+		// 로그인 인증시 처리한다.
+		
 		User user = findUser(userId);
 		logger.debug("findUser : {}", user);
 		if (!user.isMatchPassword(password)) {
