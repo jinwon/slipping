@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<environment>local</environment>
+		<environment>development</environment>
 		<jpa.version>2.0.0</jpa.version>
 		<hibernate.version>3.5.6-Final</hibernate.version>
 		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
@@ -157,6 +157,12 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.26</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -286,9 +292,6 @@
 	<profiles>
 		<profile>
 			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<environment>local</environment>
 				<maven.test.skip>false</maven.test.skip>
@@ -296,6 +299,9 @@
 		</profile>
 		<profile>
 			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<environment>development</environment>
 				<maven.test.skip>false</maven.test.skip>
