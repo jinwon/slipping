@@ -1,10 +1,14 @@
 package net.slipp.web.bbs;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.slipp.domain.bbs.Bbs;
 import net.slipp.domain.bbs.BbsService;
@@ -21,6 +25,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,9 +83,52 @@ public class BbsController {
 		model.addAttribute(new Bbs());
 		return "bbs/form";
 	}
+
+	@RequestMapping("{id}/download")
+	public void download(@LoginUser User user, @PathVariable Long id, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+		if (user == null) {
+			//유저 정보가 없을때 로그인 폼으로 이동한다.
+			PrintWriter output = response.getWriter();
+			output.println("로그인 후 이용하세요.");		
+			return;
+		}
+
+		Bbs bbs =  bbsService.findByBbsId(id);
+		
+		String path = "/upload/" + bbs.getFileName();
+		
+		File dfile = new File(path);
+	
+		response.setContentType("application/x-download");
+		response.setContentLength((int) dfile.length());
+		
+		response.setHeader("Content-Desposition", "attachment; filename=\"" + bbs.getFileName() + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		
+		OutputStream out = response.getOutputStream();
+		FileInputStream fis = null;
+		
+		try {
+			fis = new FileInputStream(dfile);
+			FileCopyUtils.copy(fis, out);
+		} finally {
+			if (fis != null)
+			try {
+				fis.close();
+			} catch (IOException ex) {
+				
+			}
+		}
+		
+		out.flush();
+		out.close();
+	}	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create( @LoginUser User user, HttpServletRequest request, Bbs bbs, @RequestParam("file") MultipartFile upfile) {
+		
+		// 게시판 추가 처리.
 		
 		String o_filename = "";
 		
@@ -125,5 +173,7 @@ public class BbsController {
 		model.addAttribute("bbs", bbsService.findByBbsId(id));
 
 		return "bbs/show";
-	}	
+	}
+	
+	
 }

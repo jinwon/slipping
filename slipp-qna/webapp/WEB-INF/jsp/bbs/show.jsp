@@ -20,6 +20,10 @@ taglib prefix="qna" tagdir="/WEB-INF/tags/qnas"%>
 			                <td>내용</td>
 			                <td>${sf:br(bbs.contents)}</td>
 			            </tr>
+			            <tr>
+			            	<td>파일명</td>
+			            	 <td> <a href="/bbs/${bbs.bbsId}/download">${sf:br(bbs.fileName)}</a> </td>
+			            </tr>
                     </table>
                 </td>
             </tr>		
