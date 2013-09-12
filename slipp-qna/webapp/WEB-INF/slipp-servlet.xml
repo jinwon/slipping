@@ -19,6 +19,7 @@
     </mvc:annotation-driven>
 
     <mvc:resources mapping="/resources/**" location="/WEB-INF/static_resources/" />
+    <mvc:resources mapping="/images/**" location="/WEB-INF/static_resources/images/" />
 
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

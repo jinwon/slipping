@@ -5,7 +5,11 @@
 		<pattern>/admin/h2/*</pattern>
 	</excludes>
 
-	<decorator name="default" page="default.jsp">
-		<pattern>/*</pattern>
+	<decorator name="bbs" page="defaultbbs.jsp">
+		<pattern>/bbs/*</pattern>
 	</decorator>
+	<decorator name="default" page="default.jsp">
+		<pattern>*</pattern>
+	</decorator>	
+	
 </decorators>

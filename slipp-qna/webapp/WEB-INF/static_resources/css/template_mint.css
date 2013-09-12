@@ -1,0 +1,38 @@
+#header { clear:both; height:43px; background: url("../images/2013/nav/mint_top.png") repeat-x; }
+#header h1 .sds { width:123px; height:17px; margin: 10px 0 0 15px; position:absolute; background: url("../images/new_nav/header_logo.png") transparent; }
+#header h1 .mailnara {width:177px; height:36px; position:absolute;}
+
+#left_nav {background:url("../images/2013/nav/mint_bg.png") repeat-y scroll 0 0; margin:0; min-height:0; overflow:hidden; position:absolute; right:0; left:0; top:0; bottom:0;}
+#left_nav .btn_fold { background-position: -253px -490px;  border: 0 none; border-radius: 0 0 0 0; height: 50px; left: 269px; top: 2px; margin: 0; overflow: hidden; position: absolute; width: 12px; z-index: 50;}
+#left_nav a.btn_fold:hover { background-position: -267px -490px; }
+
+#menu .menu_list li { font-size:0; height:64px; line-height:64px; position:relative }
+#menu .menu_list li a { background: url("../images/2013/nav/mint_ko.png") no-repeat scroll 0 0 #E9EAED; display:block; font-size:12px; width:64px; height:64px; text-decoration: none !important; }
+
+#menu .menu_list li a.home { background-position: -64px 0px;}
+#menu .menu_list li a.mail { background-position: -64px -64px;}
+#menu .menu_list li a.calendar { background-position: -64px -128px;}
+#menu .menu_list li a.contact { background-position: -64px -192px;}
+#menu .menu_list li a.sms { background-position: -64px -256px;}
+#menu .menu_list li a.board { background-position: -64px -320px;}
+#menu .menu_list li a.setting { background-position: -64px -384px;}
+#menu .menu_list li a.bulkmail { background-position: -64px -448px;}
+#menu .menu_list li a.bill { background-position: -64px -512px;}
+
+#menu .menu_list li.on a.home { background-position: 0 0px !important;}
+#menu .menu_list li.on a.mail { background-position: 0px -64px !important;}
+#menu .menu_list li.on a.calendar { background-position: 0 -128px !important;}
+#menu .menu_list li.on a.contact { background-position: 0 -192px !important;}
+#menu .menu_list li.on a.sms { background-position: 0 -256px !important;}
+#menu .menu_list li.on a.board { background-position: 0 -320px !important;}
+#menu .menu_list li.on a.setting { background-position: 0 -384px !important;}
+#menu .menu_list li.on a.bulkmail { background-position: 0 -448px !important;}
+#menu .menu_list li.on a.bill { background-position: 0 -512px !important;}
+
+
+/* 메일읽기 팝업 */
+#body_popup_data {background: url("../images/2013/nav/mint_top.png");background-repeat:repeat-x;background-color:#3C3C3C; background-position:bottom;height:59px;}
+
+/* 메일 주소 추가 */
+.mail_address_insert_top {background: url("../images/2013/nav/mint_top.png");background-repeat:repeat-x;height:43px;-moz-border-radius:15px;border-radius:15px;margin-top:0px;margin-left:5px;margin-right:5px;}
+.mail_address_insert_top_title {padding-top:15px;padding-left:15px;color:#fff;letter-spacing:-1px;line-height:100%;text-decoration:none;outline-width:medium;outline-style:none;outline-color:invert;}
