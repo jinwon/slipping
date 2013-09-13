@@ -107,7 +107,20 @@
 					</tr>
 				</table>
 			</div>
-		</fieldset>			
+		</fieldset>
+		
+		
+	    <div class="ribon_area" style="padding: 5px 0 0 8px; margin: 0px;">
+	        <ul class="ribon_menu">
+	            <li>&nbsp;</li>
+	            <li><div class="btn_mail" onClick="show_bbs_add();"><b>신규추가</b></div></li>
+	        </ul>
+	    </div>
+	    					
 	</div>
 </body>
 </html>
+
+<script>
+    load_layout();
+</script>
