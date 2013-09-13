@@ -33,13 +33,12 @@
                 south__resizable: false,
                 south__size: 28,
 
-
                 //고정시 사용
                 west__applyDefaultStyles: false, 
                 west__resizable: false,
                 west__spacing_open: 0,
                 west__spacing_closed: 10,
-                west__size: 280,
+                west__size: 220,
                 west__resizerTip: "왼쪽 메뉴의 위치를 조절합니다",
                 west__togglerTip_open:	"왼쪽 메뉴를 감춥니다",
                 west__togglerTip_closed: "왼쪽 메뉴를 펼칩니다.",
@@ -49,7 +48,20 @@
                 south__sliderTip : "하단 메뉴를 상단으로 보여줍니다."
             });			
         });
- 	</script> 
+ 	</script>
+ 	
+	<style>
+	.list_menu .menu_top h3 { cursor: default; font-size: 14px; height: 30px; padding:11px 0 0 0px; position: relative; vertical-align:middle; line-height:24px;}
+	.list_menu .menu_top ul li { vertical-align: middle; line-height:24px; padding:6px 0 4px 13px;}
+	.list_menu .menu_top ul li:hover { background-color: #F1F1F1; }
+	.list_menu .menu_top span.icon { background-image: url("/images/2013/config_icons.png"); background-repeat: no-repeat;display:inline-block; float: left; margin: 0px 5px 5px 8px; width:20px; height:24px;}
+	.list_menu .config_icon { background-position: 0px 0px; }
+	.list_menu .userconfig_icon { background-position: -30px 0px; }
+	.list_menu .mailconfig_list_icon { background-position: 0 -30px; }
+	.list_menu .spamconfig_list_icon { background-position: -30px -30px; }
+	.list_menu .menu_top ul li a {background-image:none;padding-left:0px;}
+	</style>
+ 	
     <decorator:head />
   </head>
   <body style="padding:0px;margin-top:0px;">
@@ -69,27 +81,35 @@
 	            </div>
 			</div>
 			</div>
-			
         </div>
             	
-        <div id="left_menu" class="ui-layout-west">
-        	<div id="menu">
-        		<div class="menu-area">자료실 메뉴</div>
+        <div id="left_menu" class="ui-layout-west" style="width:100%;height:100%;display:inline-block;background-color:#f2f2f2;overflow:hidden;overflow-x:hidden;overflow-y:hidden;">
+        	<div id="mail_nav" style="left:0px; margin-left:0px;">
         		
-        		<div class="list_menu">
-        		<div class="menu_top">자료실 메뉴 top</div>
-        		<div class="menu_list">자료실 메뉴 list</div>
+        		<div stype="margin-top:10px;text-align:center;width:100%;height:80px;">
+        			&nbsp;
         		</div>
         		
+        		<div style="width:100%; height:10px; border-bottom: 1px solid #c2c2c2"></div>
+        		
+        		<div class="list_menu" style="padding-bottom:5px;">
+	        		<div class="menu_top">
+	        			<h3>
+							<span class="icon"></span> <a href="/bbs/">자료실</a>
+						</h3>
+						<div style="width:100%; height:10px; border-bottom: 1px solid #c2c2c2"></div>
+	        		</div>
+	        		<ul class="menu_list">
+	        			<li><span class="icon userconfig_icon"></span><a href="#">list 1</a></li>
+	        			<li><span class="icon userconfig_icon"></span><a href="#">list 2</a></li>
+	        			<li><span class="icon userconfig_icon"></span><a href="#">list 3</a></li>
+	        		</ul>
+	        	</div>
         	</div>
         </div>
        
        <div id="content-body" class="ui-layout-center">     
-            <div id="title">
-                <h2>자료실 예제.</h2>
-            </div>
-
-	        <decorator:body/>
+ 	        <decorator:body/>
         </div>
         
 		<div id="di_footer" class="ui-layout-south">
