@@ -9,14 +9,19 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
    
     <context:property-placeholder location="classpath:application-properties.xml"/>
-    
-	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+ 
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true"/>
+		<property name="generateDdl" value="true"/>
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
+		<property name="database" value="MYSQL"/>
+	</bean>
 
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-		p:persistenceXmlLocation="classpath:META-INF/persistence.xml"
-		p:persistenceUnitName="slipp.qna" p:dataSource-ref="dataSource"
-		p:jpaDialect-ref="jpaDialect" />		
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+	p:persistenceXmlLocation="classpath:META-INF/persistence.xml"
+	p:persistenceUnitName="slipp.qna" p:dataSource-ref="dataSource"
+	p:jpaVendorAdapter-ref="jpaVendorAdapter"/>
+	
 		
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />

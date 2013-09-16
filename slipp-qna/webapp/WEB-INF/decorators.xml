@@ -8,6 +8,11 @@
 	<decorator name="bbs" page="defaultbbs.jsp">
 		<pattern>/bbs/*</pattern>
 	</decorator>
+	
+	<decorator name="bbsajax" page="defaultbbsajax.jsp">
+		<pattern>/bbsajax/*</pattern>
+	</decorator>	
+
 	<decorator name="default" page="default.jsp">
 		<pattern>*</pattern>
 	</decorator>	

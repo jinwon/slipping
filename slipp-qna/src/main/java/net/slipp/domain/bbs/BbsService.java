@@ -3,6 +3,8 @@ package net.slipp.domain.bbs;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.slipp.domain.user.User;
 import net.slipp.repository.bbs.BbsRepository;
+import net.slipp.web.bbs.BbsController;
 
 
 
 @Service("bbsService")
 @Transactional
 public class BbsService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BbsController.class);
 
 	@Resource (name = "bbsRepository")
 	private BbsRepository bbsRepository;
@@ -54,6 +59,14 @@ public class BbsService {
 	public void delete(Long id) {
 	
 		bbsRepository.delete(id);	
+	}
+	
+	public Page<Bbs> findByTitleLike(String title, Pageable page) {
+	
+		logger.debug("title = " + title);
+		logger.debug("page_number = " + page.getPageNumber());
+		
+		return bbsRepository.findByTitleLike(title, page);
 	}
 	
 }

@@ -91,6 +91,7 @@ public class QnaController {
 			//유저 정보가 없을때 로그인 폼으로 이동한다.
 			return "redirect:/user/login/form";
 		}
+		
 		model.addAttribute("question", qnaService.findByQuestionId(id));
 		return "qna/form";
 	}

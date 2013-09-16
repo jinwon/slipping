@@ -16,6 +16,7 @@ public class QnaPopulator {
 	public void populate() {
 		
 		// String writerId, String writerName, String title, String contents, String plainTags
+		/*
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목." , "글 내용. ", "java"));
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목1" , "글 내용1", "java"));
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목2" , "글 내용2", "java"));
@@ -33,7 +34,8 @@ public class QnaPopulator {
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목12" , "글 내용12", "java"));
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목13" , "글 내용13", "java"));
 		questionRepository.save(new Question("jwkim", "김진원" , "글제목14" , "글 내용14", "java"));
-		questionRepository.save(new Question("jwkim", "김진원" , "글제목15" , "글 내용15", "java"));		
+		questionRepository.save(new Question("jwkim", "김진원" , "글제목15" , "글 내용15", "java"));	
+		*/	
 		
 	}
 }

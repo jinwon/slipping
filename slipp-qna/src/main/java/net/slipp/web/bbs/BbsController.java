@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.slipp.domain.bbs.Bbs;
 import net.slipp.domain.bbs.BbsService;
@@ -44,21 +45,51 @@ public class BbsController {
 	private BbsService bbsService;
 	
 	@RequestMapping("")
-	public String index(Model model, HttpServletRequest request) {
+	public String index(Model model, HttpServletRequest request, HttpSession session) throws NullPointerException {
 
+		String s_title = "%";
+		
+		String s_type = (String) session.getAttribute("s_type");
+		String s_value = (String) session.getAttribute("s_value");
+		
+		logger.debug("세션 리스트  s_type = <<" + s_type + ">>");
+		logger.debug("세션 리스트  s_value = <<" + s_value + ">>");
+		
+		String check_type = "title";
+		
+		if ((s_type != null) && (s_value != null) )
+		{
+			if (s_type.equals(check_type)) {
+				if (s_value != "") { s_title = s_value + "%";}
+				else {
+					logger.debug("value 값이 없습니다.");
+				}
+			}
+			else {
+				logger.debug("title 값이 없습니다.");
+			}
+		}
+		
+		logger.debug("title = " + s_title);
+		
 		// 목록 리스트를 표시한다.
 		if (request.getParameter("page") == null)
 		{
-			
-			model.addAttribute("bbs",
-					bbsService.findsBbs(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+			if (s_title == "") {
+				model.addAttribute("bbs", bbsService.findsBbs(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+			} else {	
+				model.addAttribute("bbs", bbsService.findByTitleLike(s_title, createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+			}	
 		}
 		else {
 			
 			int page = Integer.parseInt(request.getParameter("page"));
-			
-			model.addAttribute("bbs",
-				bbsService.findsBbs(createPageableForList(page, DEFAULT_PAGE_SIZE)));
+
+			if (s_title == "") {
+				model.addAttribute("bbs", bbsService.findsBbs(createPageableForList(page, DEFAULT_PAGE_SIZE)));
+			} else {	
+				model.addAttribute("bbs", bbsService.findByTitleLike(s_title, createPageableForList(page, DEFAULT_PAGE_SIZE)));
+			}
 		}
 		
 		return "bbs/list";

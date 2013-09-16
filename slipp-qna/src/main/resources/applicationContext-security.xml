@@ -19,7 +19,6 @@
     	<intercept-url pattern="/bbs/*/update" access="hasRole('ROLE_USER')"/>
     	<intercept-url pattern="/bbs/*/delete" access="hasRole('ROLE_USER')"/>
  		<intercept-url pattern="/bbs/*/download" access="hasRole('ROLE_USER')"/>
-   
         <intercept-url pattern="/**" access="permitAll" />
 
         <form-login 
