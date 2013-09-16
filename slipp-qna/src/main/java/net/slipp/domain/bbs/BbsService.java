@@ -1,12 +1,13 @@
 package net.slipp.domain.bbs;
 
+
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.slipp.domain.qna.Question;
 import net.slipp.domain.user.User;
 import net.slipp.repository.bbs.BbsRepository;
 
@@ -37,5 +38,22 @@ public class BbsService {
 	public Bbs findByBbsId(Long id) {
 		return bbsRepository.findOne(id);
 	}
+	
+	public void updateBbs(User user, Bbs newBbs) {
+		Bbs bbs = bbsRepository.findOne(newBbs.getBbsId());
 
+		bbs.writedBy(user);
+		bbs.update(newBbs);
+
+		bbs.writedBy(user);
+		bbs.update(newBbs);
+		
+		bbsRepository.save(bbs);
+	}
+	
+	public void delete(Long id) {
+	
+		bbsRepository.delete(id);	
+	}
+	
 }

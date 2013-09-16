@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.slipp.domain.bbs.Bbs;
 import net.slipp.domain.bbs.BbsService;
-import net.slipp.domain.qna.Question;
 import net.slipp.domain.user.User;
 import net.slipp.support.web.argumentresolver.LoginUser;
 import net.slipp.web.bbs.BbsController;
@@ -50,6 +49,7 @@ public class BbsController {
 		// 목록 리스트를 표시한다.
 		if (request.getParameter("page") == null)
 		{
+			
 			model.addAttribute("bbs",
 					bbsService.findsBbs(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
 		}
@@ -62,7 +62,8 @@ public class BbsController {
 		}
 		
 		return "bbs/list";
-	}	
+	}
+	
 
 	private Pageable createPageableForList(int page, int size) {
 		if (page <= 0) {
@@ -124,6 +125,56 @@ public class BbsController {
 		out.flush();
 		out.close();
 	}	
+
+	@RequestMapping("/{id}/form")
+	public String updateForm(@LoginUser User user, @PathVariable Long id, HttpServletRequest request, Model model) {
+		
+		logger.debug("Question : 게시판 수정. ");
+		
+		if (user == null) {
+			//유저 정보가 없을때 로그인 폼으로 이동한다.
+			return "redirect:/user/login/form";
+		}
+		
+		logger.debug("id = " + id);
+		
+		model.addAttribute("bbs", bbsService.findByBbsId(id));
+		
+		
+		return "bbs/form";
+	}
+	
+	@RequestMapping(value = "{id}/update")
+	public String update(@LoginUser User user, @PathVariable Long id, Bbs bbs) {
+		
+		logger.debug("수정 bbsId = " + bbs.getBbsId());
+
+		// 질문 수정시 로그인 체크.
+		bbsService.updateBbs(user, bbs);
+		
+		return "redirect:/bbs/";
+	}
+
+	@RequestMapping(value = "{id}/delete")
+	public String delete(@LoginUser User user, @PathVariable Long id) {
+		//삭제 처리.
+		
+		logger.debug("삭제 bbsId = " + id);
+		
+		//첨부파일을 찾아 지운다.
+		
+		Bbs bbs = bbsService.findByBbsId(id);
+		
+		String path = "/upload/" + bbs.getFileName();
+		
+		File dfile = new File(path);
+		dfile.delete();
+		
+		bbsService.delete(id);
+
+		return "redirect:/bbs/";
+	}
+ 	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create( @LoginUser User user, HttpServletRequest request, Bbs bbs, @RequestParam("file") MultipartFile upfile) {
@@ -163,9 +214,9 @@ public class BbsController {
 		logger.debug("Bbs : {}", bbs);
 		bbsService.createBbs(user, bbs, o_filename);
 		
-		return "redirect:/bbs";
+		return "redirect:/bbs/";
 	}
-	
+
 	@RequestMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		
@@ -174,6 +225,6 @@ public class BbsController {
 
 		return "bbs/show";
 	}
-	
+
 	
 }

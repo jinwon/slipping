@@ -46,7 +46,15 @@ taglib prefix="qna" tagdir="/WEB-INF/tags/qnas"%>
 	function show_bbs_add()
 	{
 		document.location.href = "/bbs/form";
-	}	
+	}
+	
+	function show_bbs_delete(bbsid)
+	{
+		if (confirm("삭제하시겠습니까?"))
+		{
+			document.location.href = "/bbs/" + bbsid + "/delete";	
+		}	
+	}
 </script>
 </head>
 <body>
@@ -95,6 +103,8 @@ taglib prefix="qna" tagdir="/WEB-INF/tags/qnas"%>
 	            <li>&nbsp;</li>
 	            <li><div class="btn_mail" onClick="show_bbs_list();"><b>목록</b></div></li>
 	            <li><div class="btn_mail" onClick="show_bbs_modify('${bbs.bbsId}');"><b>수정</b></div></li>
+	            <li><div class="btn_mail" onClick="show_bbs_delete('${bbs.bbsId}');"><b>삭제</b></div></li>
+	            <li>&nbsp;</li>
 	            <li><div class="btn_mail" onClick="show_bbs_add();"><b>신규추가</b></div></li>
 	        </ul>
 	    </div>

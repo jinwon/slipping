@@ -1,4 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-        <p id="footer">
-            삼정데이타 서비스 개발팀
-        </p>
+ 
+<style>
+#footer { background: none repeat scroll 0 0 #31323A; border-top: 1px solid #262B35; height: 28px; width: 100%; z-index: 100; bottom: 0; }
+#footer .quick_tools { background-color: #31323A; color: #999999; font-size: 11px; left: 13px; letter-spacing: -1px; line-height: 14px; overflow: hidden; position: absolute; top: 6px; white-space: nowrap; }
+#footer .quick_tools .capacity strong { color: #49DA37; font-family: tahoma; font-size: 11px; font-weight: bold; letter-spacing: 0; }
+#footer .quick_tools .capacity em { color: #999999; font-family: tahoma; font-size: 11px; letter-spacing: 0; }
+#footer .quick_tools .bar { color: #53545E; margin: 0 5px 0 2px; }
+#footer .quick_tools a { color: #999999; font-size: 11px; margin-right:2px; cursor: pointer }
+#footer .quick_tools span.setup { background:url('<?=MUA_DIR?>/images/icon_option.png') 0px -1px no-repeat; width:10px; height:10px; display:inline-block; vertical-align:middle; margin-right:4px; cursor: pointer }
+#footer address { color: #838386; display: block; font-family: Verdana; font-size: 9px; padding-top: 7px; position: absolute; text-align: right; top: 0; width: 100%; right:30px}
+#footer address a { color: #AFAFAF; font-family: 나눔명조, 'Nanum Myeongjo', '돋움', dotum, Tahoma; font-size: 11px; letter-spacing: -1px; font-weight: bold; }
+</style>
+ 
+ 
+<p id="footer">
+	<address><a href="#">삼정데이타 서비스 개발팀</a></address>
+</p>

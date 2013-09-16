@@ -64,17 +64,22 @@
 	    </div>	    
 	</div>
 	
-	<div id="body_data" class="ui-layout-center" style="width:100%;min-width:750px;">	
-		<c:set var="method" value="post" />
+	<div id="body_data" class="ui-layout-center" style="width:100%;min-width:750px;">
+		<c:if test="${empty bbs.bbsId}">
+			<c:set var="method" value="post" />
+			<c:set var="taction" value="/bbs/" />
+		</c:if>
+			
 		<c:if test="${not empty bbs.bbsId}">
-		<c:set var="method" value="put" />
+			<c:set var="method" value="put" />
+			<c:set var="taction" value="/bbs/${bbs.bbsId}/update" />
 		</c:if>
 		
 		<c:if test="${param.upload == 'fail' }">
 			파일 업로드 오류.
 		</c:if>
 		
-		<form:form name="insert_frm" modelAttribute="bbs" action="/bbs" method="${method}" enctype="multipart/form-data">
+		<form:form name="insert_frm" modelAttribute="bbs" action="${taction}" method="${method}" enctype="multipart/form-data">
 			<form:hidden path="bbsId"/>
 			<table id="user-th-beauty" class="use-table">
 				<tr>
@@ -85,15 +90,32 @@
 					<td class="styleth" width="80">내용</td>
 					<td style="line-height:1.5;"><form:textarea path="contents" rows="5" cols="100"></form:textarea></td>
 				</tr>
+			<c:if test="${empty bbs.bbsId}">
 				<tr>
 					<td class="styleth">파일</td>
 					<td style="line-height:1.5;"><input name="file" type="file"></td>
-				</tr> 
+				</tr>
+			</c:if>
+			
+			<c:if test="${not empty bbs.bbsId}">
+				<tr>
+					<td class="styleth">파일</td>
+					<td style="line-height:1.5;">${bbs.fileName} <a href="#" onClick="">파일 삭제</a></td>
+				</tr>
+			</c:if>
+			
 			</table>
 			
 			<div class="ribon_area" style="float:left; width:100%; padding: 5px 0 0 8px; margin: 0px;">
 			    <ul class="ribon_menu">
+			<c:if test="${not empty bbs.bbsId}">
+			        <li><div class="btn_address" id="btn_update" name="btn_update" onClick="Check_Form();" style="margin-left:180px;"><b>수정</b></div></li>
+			</c:if>
+
+			<c:if test="${empty bbs.bbsId}">
 			        <li><div class="btn_address" id="btn_update" name="btn_update" onClick="Check_Form();" style="margin-left:180px;"><b>추가</b></div></li>
+			</c:if>
+			
 			        <li>&nbsp;</li>
 			        <li><div class="btn_mail" id="btn_cancel" name="btn_cancel" onClick="Reset_form();"><b>취소</b></div></li>
 			    </ul>

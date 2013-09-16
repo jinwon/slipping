@@ -14,11 +14,12 @@
         <intercept-url pattern="/qna" method="PUT" access="hasRole('ROLE_USER')"/>
   
         <intercept-url pattern="/bbs/form" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/bbs" method="POST" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/bbs/" method="POST" access="hasRole('ROLE_USER')"/>
  		<intercept-url pattern="/bbs/*/form" access="hasRole('ROLE_USER')"/>
+    	<intercept-url pattern="/bbs/*/update" access="hasRole('ROLE_USER')"/>
+    	<intercept-url pattern="/bbs/*/delete" access="hasRole('ROLE_USER')"/>
  		<intercept-url pattern="/bbs/*/download" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/bbs" method="PUT" access="hasRole('ROLE_USER')"/>
-    
+   
         <intercept-url pattern="/**" access="permitAll" />
 
         <form-login 

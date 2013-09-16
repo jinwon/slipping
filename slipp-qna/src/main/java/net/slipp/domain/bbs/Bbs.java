@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 
 import net.slipp.domain.CreatedAndUpdatedDateEntityListener;
 import net.slipp.domain.HasCreatedAndUpdatedDate;
+import net.slipp.domain.qna.Question;
 import net.slipp.domain.user.User;
 
 
@@ -154,6 +155,11 @@ public class Bbs implements HasCreatedAndUpdatedDate {
 	public String getWriterName() {
 		return writerName;
 	}
+	
+	public void update(Bbs newBbs) {
+		this.title = newBbs.title;
+		this.contentsHolder = newBbs.contentsHolder;
+	}	
 	
 	@Override
 	public String toString() {

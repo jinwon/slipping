@@ -37,6 +37,11 @@
 	{
 		document.location.href = "/bbs/form";
 	}
+	
+	function check_search()
+	{
+				
+	}
 </script>
 </head>
 <body>
@@ -53,6 +58,13 @@
 	        <ul class="ribon_menu">
 	            <li>&nbsp;</li>
 	            <li><div class="btn_mail" onClick="show_bbs_add();"><b>신규추가</b></div></li>
+	            <li>&nbsp;</li>
+	            <li>
+	            	검색 : <select id="s_type" name="s_type"><option value="subject">제목</option></select>
+	            	<input type="text" id="s_value" name="s_value" value="" style="width:100px;">
+	            	<input type="button" name="s_submit" value="검색" onClick="javascript:check_search();">
+	            	
+	            </li>
 	        </ul>
 	    </div>
 	</div>
@@ -91,7 +103,7 @@
 					  <td>
 				        <!--페이지영역 -->
 				            <sl:pager
-				                prefixURI="/bbs"
+				                prefixURI="/bbs/"
 				                pageHtml='<a href="{url}">{page}</a>'
 				                currentPageHtml='<a href="#" class="active">{page}</a>'
 				                pageSeparator=" "
