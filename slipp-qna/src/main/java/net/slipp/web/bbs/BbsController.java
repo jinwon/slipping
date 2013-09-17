@@ -51,10 +51,7 @@ public class BbsController {
 		
 		String s_type = (String) session.getAttribute("s_type");
 		String s_value = (String) session.getAttribute("s_value");
-		
-		logger.debug("세션 리스트  s_type = <<" + s_type + ">>");
-		logger.debug("세션 리스트  s_value = <<" + s_value + ">>");
-		
+				
 		String check_type = "title";
 		
 		if ((s_type != null) && (s_value != null) )
@@ -79,6 +76,8 @@ public class BbsController {
 				model.addAttribute("bbs", bbsService.findsBbs(createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
 			} else {	
 				model.addAttribute("bbs", bbsService.findByTitleLike(s_title, createPageableForList(DEFAULT_PAGE_NO, DEFAULT_PAGE_SIZE)));
+				model.addAttribute("s_type", s_type);
+				model.addAttribute("s_value", s_value);
 			}	
 		}
 		else {
@@ -89,6 +88,8 @@ public class BbsController {
 				model.addAttribute("bbs", bbsService.findsBbs(createPageableForList(page, DEFAULT_PAGE_SIZE)));
 			} else {	
 				model.addAttribute("bbs", bbsService.findByTitleLike(s_title, createPageableForList(page, DEFAULT_PAGE_SIZE)));
+				model.addAttribute("s_type", s_type);
+				model.addAttribute("s_value", s_value);
 			}
 		}
 		

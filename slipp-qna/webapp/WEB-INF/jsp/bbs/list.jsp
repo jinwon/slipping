@@ -43,8 +43,6 @@
 		var s_value = jQuery("#s_value").val();
 		var s_type = jQuery("#s_type").val();
 		
-		alert(s_value);
-		
 		jQuery.ajax({
 			type: "POST",
 			url:"/bbsajax/list",
@@ -55,7 +53,6 @@
 			success: function (data, status) {
 				if (data == "ok")
 				{
-					alert(data);
 					window.location.href = "/bbs/";									
 				}
 			}
@@ -81,8 +78,10 @@
 	            <li><div class="btn_mail" onClick="show_bbs_add();"><b>신규추가</b></div></li>
 	            <li>&nbsp;</li>
 	            <li>
-	            	검색 : <select id="s_type" name="s_type"><option value="title">제목</option></select>
-	            	<input type="text" id="s_value" name="s_value" value="" style="width:100px;">
+	            	검색 : <select id="s_type" name="s_type">
+	            			<option value="title">제목</option>
+	            		</select>
+	            	<input type="text" id="s_value" name="s_value" value="${s_value}" style="width:100px;">
 	            	<input type="button" name="s_submit" value="검색" onClick="javascript:check_search();return false;">
 	            	
 	            </li>
