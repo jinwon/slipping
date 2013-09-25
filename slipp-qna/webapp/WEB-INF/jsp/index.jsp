@@ -6,7 +6,7 @@
   </head>
   <body>
         <div id="main">
-        	<a href="/qna">게시물 목록 보기</a>
+        	<a href="/qna/">게시물 목록 보기</a>
             <a href="/qna/form">질문하기</a>
             <a href="/bbs/">자료실</a>
         </div>

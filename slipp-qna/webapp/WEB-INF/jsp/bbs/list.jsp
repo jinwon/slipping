@@ -54,6 +54,9 @@
 				if (data == "ok")
 				{
 					window.location.href = "/bbs/";									
+				} else {
+					alert("잘못된 응답입니다.");
+					alert(data);
 				}
 			}
 		});
